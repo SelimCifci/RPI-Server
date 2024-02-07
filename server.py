@@ -1,5 +1,6 @@
 import socket
 import Motor
+import fcntl, os
 
 HOST = "192.168.178.79"
 PORT = 8001
@@ -8,6 +9,7 @@ pwm = Motor.Motor()
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
+    fcntl.fcntl(s, fcntl.F_SETFL, os.O_NONBLOCK)
     s.listen()
     conn, addr = s.accept()
     with conn:
