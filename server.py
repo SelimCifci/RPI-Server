@@ -6,7 +6,7 @@ PORT = 8001
 
 pwm = Motor.Motor()
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
     s.bind((HOST, PORT))
     s.listen()
     conn, addr = s.accept()
