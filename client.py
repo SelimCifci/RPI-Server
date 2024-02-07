@@ -6,7 +6,7 @@ PORT = 8001
 
 screen = pygame.display.set_mode((640, 360))
 
-with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
     running = True
     while running:
