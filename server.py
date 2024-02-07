@@ -12,8 +12,10 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         while True:
             try:
                 data = conn.recv(1024).decode()
-                print(data)
-                conn.sendall("Pong".encode())
+                if data == "w": print("NACH VORNE DU FETTARSCH")
+                elif data == "s": print("NACH VORNE DU FETTARSCH")
+                elif data == "a": print("NACH VORNE DU FETTARSCH")
+                elif data == "d": print("NACH VORNE DU FETTARSCH")
             except KeyboardInterrupt:
                 break
         s.close()

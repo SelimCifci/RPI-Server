@@ -1,15 +1,25 @@
 import socket
+import pygame
 
-HOST = "192.168.178.30"
+HOST = "192.168.178.79"
 PORT = 8001
+
+screen = pygame.display.set_mode((640, 360))
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
-    while True:
+    running = True
+    while running:
         try:
-            s.sendall("Ping".encode())
-            data = s.recv(1024).decode()
-            print(data)
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+
+            key = pygame.key.get_pressed()
+            if key[pygame.K_w]: s.sendall("w".encode())
+            elif key[pygame.K_s]: s.sendall("s".encode())
+            elif key[pygame.K_a]: s.sendall("a".encode())
+            elif key[pygame.K_d]: s.sendall("d".encode())
         except KeyboardInterrupt:
-            break
+            running = False
     s.close()
