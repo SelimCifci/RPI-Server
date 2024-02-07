@@ -1,7 +1,10 @@
 import socket
+import Motor
 
 HOST = "192.168.178.79"
 PORT = 8001
+
+pwm = Motor.Motor()
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
@@ -12,10 +15,11 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         while True:
             try:
                 data = conn.recv(1024).decode()
-                if data == "w": print("NACH VORNE DU FETTARSCH")
-                elif data == "s": print("NACH VORNE DU FETTARSCH")
-                elif data == "a": print("NACH VORNE DU FETTARSCH")
-                elif data == "d": print("NACH VORNE DU FETTARSCH")
+                if data == "w": pwm.setMotorModel(4096,4096,4096,4096)
+                elif data == "s": pwm.setMotorModel(-4096,-4096,-4096,-4096)
+                elif data == "a": pwm.setMotorModel(4096,4096,-4096,-4096)
+                elif data == "d": pwm.setMotorModel(-4096,-4096,4096,4096)
+                elif data == "Stop": pwm.setMotorModel(0,0,0,0)
             except KeyboardInterrupt:
                 break
         s.close()

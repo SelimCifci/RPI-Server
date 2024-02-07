@@ -20,6 +20,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             elif key[pygame.K_s]: s.sendall("s".encode())
             elif key[pygame.K_a]: s.sendall("a".encode())
             elif key[pygame.K_d]: s.sendall("d".encode())
+            else: s.sendall("Stop".encode())
+
         except KeyboardInterrupt:
             running = False
     s.close()
