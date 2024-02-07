@@ -15,11 +15,13 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         while True:
             try:
                 data = conn.recv(1024).decode()
+                print(data)
+                print(type(data))
                 if data.startswith("w"): pwm.setMotorModel(4096,4096,4096,4096)
                 elif data.startswith("s"): pwm.setMotorModel(-4096,-4096,-4096,-4096)
                 elif data.startswith("a"): pwm.setMotorModel(4096,4096,-4096,-4096)
                 elif data.startswith("d"): pwm.setMotorModel(-4096,-4096,4096,4096)
-                elif data == None: pwm.setMotorModel(0,0,0,0)
+                elif data == "": pwm.setMotorModel(0,0,0,0)
             except KeyboardInterrupt:
                 s.close()
                 break
