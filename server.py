@@ -9,9 +9,9 @@ pwm = Motor.Motor()
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
-    fcntl.fcntl(s, fcntl.F_SETFL, os.O_NONBLOCK)
     s.listen()
     conn, addr = s.accept()
+    fcntl.fcntl(s, fcntl.F_SETFL, os.O_NONBLOCK)
     with conn:
         print(f"Connected by {addr}")
         while True:
