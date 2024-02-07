@@ -15,7 +15,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         while True:
             try:
                 data = conn.recv(1024).decode()
-                if data == "w": pwm.setMotorModel(4096,4096,4096,4096)
+                print(data)
+                if data.startswith("w"): pwm.setMotorModel(4096,4096,4096,4096)
                 elif data == "s": pwm.setMotorModel(-4096,-4096,-4096,-4096)
                 elif data == "a": pwm.setMotorModel(4096,4096,-4096,-4096)
                 elif data == "d": pwm.setMotorModel(-4096,-4096,4096,4096)
