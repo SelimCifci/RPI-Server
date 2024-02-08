@@ -1,7 +1,7 @@
 import socket
 import pygame
 
-HOST = "192.168.178.79"
+HOST = "192.168.178.30"
 PORT = 8001
 
 screen = pygame.display.set_mode((640, 360))
