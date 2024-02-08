@@ -1,8 +1,8 @@
 import socket
 import pygame
 
-HOST = "192.168.178.30"
-PORT = 8001
+HOST = "192.168.178.79"
+PORT = 6666
 
 screen = pygame.display.set_mode((640, 360))
 
@@ -13,15 +13,12 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
-            
-            send = "n"
-            key = pygame.key.get_pressed()
-            if key[pygame.K_w]: send = "w"
-            elif key[pygame.K_s]: send = "s"
-            elif key[pygame.K_a]: send = "a"
-            elif key[pygame.K_d]: send = "d"
 
-            s.sendto(send.encode(), (HOST, PORT))
+            key = pygame.key.get_pressed()
+            if key[pygame.K_w]: s.sendto("w".encode(), (HOST, PORT))
+            elif key[pygame.K_s]: s.sendto("s".encode(), (HOST, PORT))
+            elif key[pygame.K_a]: s.sendto("a".encode(), (HOST, PORT))
+            elif key[pygame.K_d]: s.sendto("d".encode(), (HOST, PORT))
         except KeyboardInterrupt:
             s.close()
             break
