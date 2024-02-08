@@ -6,8 +6,7 @@ PORT = 8001
 
 screen = pygame.display.set_mode((640, 360))
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.connect((HOST, PORT))
+with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
     running = True
     while running:
         try:
@@ -22,7 +21,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             elif key[pygame.K_a]: send = "a"
             elif key[pygame.K_d]: send = "d"
 
-            s.sendall(send.encode())
+            s.sendto(send.encode(), (HOST, PORT))
         except KeyboardInterrupt:
             s.close()
             break
