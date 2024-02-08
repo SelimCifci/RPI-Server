@@ -23,7 +23,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             elif key[pygame.K_d]: send = "d"
 
             s.sendall(send.encode())
-            s.recv(1024)
         except KeyboardInterrupt:
             s.close()
             break
