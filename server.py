@@ -1,24 +1,24 @@
 from omegaconf import DictConfig
 import socket
 import hydra
-#import Motor
+import Motor
 
 @hydra.main(version_base=None, config_path="configs", config_name="config")
 def main(cfg: DictConfig):
-    #pwm = Motor.Motor()
+    pwm = Motor.Motor()
 
     with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
         s.bind((cfg.HOST, cfg.PORT))
         while True:
             try:
-                data, _ = s.recvfrom(4096)
+                data, _ = s.recvfrom(1)
                 data = data.decode()
                 print(data)
-                """if data.startswith("w"): pwm.setMotorModel(4096,4096,4096,4096)
-                elif data.startswith("s"): pwm.setMotorModel(-4096,-4096,-4096,-4096)
-                elif data.startswith("a"): pwm.setMotorModel(4096,4096,-4096,-4096)
-                elif data.startswith("d"): pwm.setMotorModel(-4096,-4096,4096,4096)
-                elif data.startswith("n"): pwm.setMotorModel(0,0,0,0)"""
+                if data == "w": pwm.setMotorModel(4096,4096,4096,4096)
+                elif data == "s": pwm.setMotorModel(-4096,-4096,-4096,-4096)
+                elif data == "a": pwm.setMotorModel(4096,4096,-4096,-4096)
+                elif data == "d": pwm.setMotorModel(-4096,-4096,4096,4096)
+                elif data == "n": pwm.setMotorModel(0,0,0,0)
             except KeyboardInterrupt:
                 s.close()
                 break
