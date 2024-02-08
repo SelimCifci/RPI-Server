@@ -10,7 +10,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
     s.bind((HOST, PORT))
     while True:
         try:
-            data, _ = s.recvfrom(1024).decode()
+            data, _ = s.recvfrom(1024)
+            data = data.decode()
             print(data)
             if data.startswith("w"): pwm.setMotorModel(4096,4096,4096,4096)
             elif data.startswith("s"): pwm.setMotorModel(-4096,-4096,-4096,-4096)
