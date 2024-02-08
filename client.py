@@ -14,12 +14,16 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
-
+            
+            send = ""
             key = pygame.key.get_pressed()
-            if key[pygame.K_w]: s.sendall("w".encode())
-            elif key[pygame.K_s]: s.sendall("s".encode())
-            elif key[pygame.K_a]: s.sendall("a".encode())
-            elif key[pygame.K_d]: s.sendall("d".encode())
+            if key[pygame.K_w]: send = "w"
+            elif key[pygame.K_s]: send = "s"
+            elif key[pygame.K_a]: send = "a"
+            elif key[pygame.K_d]: send = "d"
+
+            s.sendall(send.encode())
+            s.recv(1024)
         except KeyboardInterrupt:
             s.close()
             break

@@ -1,6 +1,5 @@
 import socket
 import Motor
-import errno, select
 
 HOST = "192.168.178.79"
 PORT = 8001
@@ -21,11 +20,10 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 elif data.startswith("s"): pwm.setMotorModel(-4096,-4096,-4096,-4096)
                 elif data.startswith("a"): pwm.setMotorModel(4096,4096,-4096,-4096)
                 elif data.startswith("d"): pwm.setMotorModel(-4096,-4096,4096,4096)
-            except socket.error as e:
-                if e.errno != errno.EAGAIN:
-                    raise e
+
+                s.sendall(data)
+            except socket.error:
                 pwm.setMotorModel(0,0,0,0)
-                select.select([],[s],[])
             except KeyboardInterrupt:
                 s.close()
                 break
