@@ -1,8 +1,8 @@
 import socket
 import pygame
 
-HOST = "192.168.178.30"
-PORT = 6666
+HOST = "192.168.178.79"
+PORT = 1234
 
 screen = pygame.display.set_mode((640, 360))
 clock = pygame.time.Clock()
