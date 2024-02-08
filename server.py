@@ -11,7 +11,7 @@ def main(cfg: DictConfig):
         s.bind((cfg.HOST, cfg.PORT))
         while True:
             try:
-                data, _ = s.recvfrom(1)
+                data, _ = s.recvfrom(4096)
                 data = data.decode()
                 print(data)
                 if data.startswith("w"): pwm.setMotorModel(4096,4096,4096,4096)

@@ -5,6 +5,7 @@ HOST = "192.168.178.79"
 PORT = 6666
 
 screen = pygame.display.set_mode((640, 360))
+clock = pygame.time.Clock()
 
 with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
     running = True
@@ -22,3 +23,5 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
         except KeyboardInterrupt:
             s.close()
             break
+
+        clock.tick(30)
