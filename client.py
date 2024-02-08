@@ -15,7 +15,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 if event.type == pygame.QUIT:
                     running = False
             
-            send = "None"
+            send = "n"
             key = pygame.key.get_pressed()
             if key[pygame.K_w]: send = "w"
             elif key[pygame.K_s]: send = "s"
